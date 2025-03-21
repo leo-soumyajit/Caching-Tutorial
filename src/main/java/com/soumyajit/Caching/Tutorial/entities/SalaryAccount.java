@@ -20,8 +20,8 @@ public class SalaryAccount {
 
     private BigDecimal balance;
 
-    @Version
-    private Long version;
+//    @Version
+//    private Long version;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore

@@ -2,8 +2,10 @@ package com.soumyajit.Caching.Tutorial.controllers;
 
 import com.soumyajit.Caching.Tutorial.dto.EmployeeDto;
 //import com.soumyajit.Caching.Tutorial.entities.SalaryAccount;
+import com.soumyajit.Caching.Tutorial.entities.SalaryAccount;
 import com.soumyajit.Caching.Tutorial.services.EmployeeService;
 //import com.soumyajit.Caching.Tutorial.services.SalaryAccountService;
+import com.soumyajit.Caching.Tutorial.services.SalaryAccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final SalaryAccountService salaryAccountService;
 
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable Long id) {
@@ -40,9 +43,9 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
-//    @PutMapping("/incrementBalance/{accountId}")
-//    public ResponseEntity<SalaryAccount> incrementBalance(@PathVariable Long accountId) {
-//        SalaryAccount salaryAccount = salaryAccountService.incrementBalance(accountId);
-//        return ResponseEntity.ok(salaryAccount);
-//    }
+    @PutMapping("/incrementBalance/{accountId}")
+    public ResponseEntity<SalaryAccount> incrementBalance(@PathVariable Long accountId) {
+        SalaryAccount salaryAccount = salaryAccountService.incrementBalance(accountId);
+        return ResponseEntity.ok(salaryAccount);
+    }
 }

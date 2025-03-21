@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpServerErrorException;
 
 @RestControllerAdvice
 @Slf4j
@@ -18,9 +19,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.notFound().build();
     }
 
-    @ExceptionHandler(StaleObjectStateException.class)
-    public ResponseEntity<?> handleStaleObjectState(StaleObjectStateException ex) {
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> handleStaleObjectState(RuntimeException ex) {
         log.error(ex.getLocalizedMessage());
-        return new ResponseEntity<>("Stale data\n", HttpStatus.CONFLICT);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
